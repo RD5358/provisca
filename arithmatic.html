@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Arithmetic Calculator | Rohit Desai</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: #f0f2f5;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .calc-container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+    .calc-container h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+    .form-control {
+      margin: 10px 0;
+      padding: 10px;
+      font-size: 1.1rem;
+    }
+    .btn-group .btn {
+      width: 45%;
+      margin: 5px;
+    }
+    .btn-op {
+      background-color: #0d6efd;
+      color: white;
+    }
+    .btn-op:hover {
+      background-color: #0b5ed7;
+    }
+    .btn-result {
+      background-color: #198754;
+      color: white;
+      margin-top: 20px;
+      width: 100%;
+    }
+    .btn-result:hover {
+      background-color: #157347;
+    }
+    .result-box {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 1.3rem;
+      color: #212529;
+    }
+  </style>
+</head>
+<body>
+
+<div class="calc-container">
+  <h2>Arithmetic Calculator</h2>
+
+  <input type="number" id="num1" class="form-control" placeholder="Enter first number">
+  <input type="number" id="num2" class="form-control" placeholder="Enter second number">
+
+  <div class="btn-group d-flex flex-wrap justify-content-center">
+    <button class="btn btn-op" onclick="setOperator('+')">Add (+)</button>
+    <button class="btn btn-op" onclick="setOperator('-')">Subtract (-)</button>
+    <button class="btn btn-op" onclick="setOperator('*')">Multiply (×)</button>
+    <button class="btn btn-op" onclick="setOperator('/')">Divide (÷)</button>
+  </div>
+
+  <button class="btn btn-result" onclick="showResult()">Show Result</button>
+
+  <div class="result-box" id="resultText">Result will appear here</div>
+</div>
+
+<script>
+  let operator = '+';
+
+  function setOperator(op) {
+    operator = op;
+  }
+
+  function showResult() {
+    const n1 = parseFloat(document.getElementById('num1').value);
+    const n2 = parseFloat(document.getElementById('num2').value);
+    let result = '';
+
+    if (isNaN(n1) || isNaN(n2)) {
+      result = 'Please enter valid numbers.';
+    } else {
+      switch (operator) {
+        case '+': result = `${n1 + n2}`; break;
+        case '-': result = `${n1 - n2}`; break;
+        case '*': result = `${n1 * n2}`; break;
+        case '/': result = n2 !== 0 ? `${(n1 / n2).toFixed(2)}` : 'Cannot divide by zero'; break;
+        default: result = 'Choose an operation';
+      }
+    }
+
+    document.getElementById('resultText').textContent = `Result: ${result}`;
+  }
+</script>
+
+</body>
+</html>
